@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            width: auto;
+            height: 98vh;
+            background: url("https://media.bahag.com/assets/resp_product/03/28/90032894_21187817.jpg");
+            display: flex;
+            justify-content: center;
+            flex-flow: wrap;
+        }
+
+        #wrapper {
+            width: 70%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #wrapper2 {
+            border: 1px solid black;
+            width: 100%;
+            height: 100%;
+            background: url("https://us.123rf.com/450wm/sutichak/sutichak1511/sutichak151100733/47990780-madera-de-la-textura-del-grano-marr%C3%B3n-fondo-de-pared-de-madera-oscura-vista-desde-arriba-de-la-mesa-de-.jpg?ver=6");
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row;
+        }
+
+        #tablero {
+            width: 70%;
+            height: 80%;
+            border: 1px solid black;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: center;
+            background: url("https://tiendatelas.com/32032-large_default/fieltro-tapete-cartas.jpg");
+            overflow: hidden;
+        }
+
+        #tablero img {
+            border: 1px solid black;
+            width: calc(25% - 20px);
+            margin: 10px;
+            height: 20%;
+        }
+
+        .sinvoltear {
+            content: url("img/casillasinvoltear.jpg") !important;
+            background: url("img/casillasinvoltear.jpg");
+            animation: voltearAbajo;
+            animation-duration: 0.7s;
+            animation-fill-mode: forwards;
+        }
+
+        .voltear {
+            background: url("img/casillasinvoltear.jpg");
+            animation: darVuelta;
+            animation-duration: 0.7s;
+            animation-fill-mode: forwards;
+        }
+
+        .voltear_abajo {
+            background: url("img/casillasinvoltear.jpg");
+            animation: voltearAbajo;
+            animation-duration: 0.7s;
+            animation-fill-mode: forwards;
+        }
+
+        .resultados {
+            width: 5%;
+            height: 10%;
+            border: 1px solid black;
+            background: #1d1d1d;
+            color: white;
+            padding: 5px;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .resultado {
+            display: block;
+            margin-top: 5px;
+        }
+
+        #gif {
+            background: url("img/ganaste.gif");
+            background-size: 100%;
+            background-repeat: no-repeat;
+            width: 100%;
+            height: 100%;
+        }
+
+        @keyframes darVuelta {
+            from {
+                transform: rotateY(30deg);
+            }
+
+            to {
+                transform: rotateY(180deg);
+            }
+        }
+
+        @keyframes voltearAbajo {
+            from {
+                transform: rotateY(180deg);
+            }
+
+            to {
+                transform: rotateY(0deg);
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            body {
+                height: 100vh;
+                justify-content: start;
+            }
+
+            #wrapper {
+                height: 80%;
+                width: 100%;
+                justify-content: center;
+                align-items: center;
+            }
+
+            #wrapper2 {
+                width: 100%;
+                height: 100%;
+                flex-flow: row;
+            }
+
+            #tablero {
+                width: 100%;
+                height: 100%;
+            }
+
+            .resultados {
+                width: 100%;
+                height: 10%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="resultados">
+        Aciertos: <span class="resultado" id="aciertos">0</span>
+    </div>
+    <div id="wrapper">
+        <div id="wrapper2">
+            <script src="juego.js"></script>
+            <script>
+                window.onload = function () {
+                    //Creamos tablero y pasamos por parámetro el div que contendrá las casillas
+                    let tablero = new Tablero(document.getElementById("tablero"), document.getElementById("aciertos"), document.getElementById("errores"));
+                    //Iniciamos tablero
+                    tablero.iniciar();
+                    //Añadimos a cada imagen el seleccionarCasilla
+                    for (imagen of document.getElementsByTagName("img")) {
+                        imagen.addEventListener("click", function (evento) {
+                            //tablero.casillas[this.dataset.id].voltearCasilla(tablero.casillas, this);
+                            tablero.voltearCasilla(this);
+                        })
+                    }
+                }
+            </script>
+            <div id="tablero">
+                <div></div>
+            </div>
+        </div>
+    </div>
+    <div class="resultados">
+        Intentos: <span class="resultado" id="errores">0</span>
+    </div>
+</body>
+
+</html>
