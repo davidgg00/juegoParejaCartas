@@ -87,9 +87,13 @@
             border: 1px solid black;
             background: #1d1d1d;
             color: white;
-            padding: 5px;
-            text-align: center;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            font-size: 1em;
         }
 
         .resultado {
@@ -125,6 +129,12 @@
             }
         }
 
+        @media screen and (max-width: 1150px) {
+            .resultados {
+                width: 10%;
+            }
+        }
+
         @media screen and (max-width: 600px) {
             body {
                 height: 100vh;
@@ -152,6 +162,7 @@
             .resultados {
                 width: 100%;
                 height: 10%;
+                font-size: 1.4em;
             }
         }
     </style>
